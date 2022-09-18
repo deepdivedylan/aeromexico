@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.deepdivedylan.aeromexico'
+group 'mx.deepdivedylan.aeromexico'
 version '1.0-SNAPSHOT'
 
 repositories {
