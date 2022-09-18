@@ -19,18 +19,18 @@ public class AnnualSpendingPlan {
         this.pointsPurchases = new LinkedList<Integer>();
     }
 
-    public AnnualSpendingPlan(Double exchangeRate) {
-        this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>();
+    public AnnualSpendingPlan(Map<CreditCard, AnnualSpending> creditCardUsage, Double exchangeRate, List<Integer> pointsPurchases) {
+        this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>(creditCardUsage);
         this.exchangeRate = exchangeRate;
         this.multiplePlan = new MultiplePlan();
-        this.pointsPurchases = new LinkedList<Integer>();
+        this.pointsPurchases = new LinkedList<Integer>(pointsPurchases);
     }
 
-    public AnnualSpendingPlan(Double exchangeRate, MultiplePlan multiplePlan) {
-        this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>();
+    public AnnualSpendingPlan(Map<CreditCard, AnnualSpending> creditCardUsage, Double exchangeRate, MultiplePlan multiplePlan, List<Integer> pointsPurchases) {
+        this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>(creditCardUsage);
         this.exchangeRate = exchangeRate;
         this.multiplePlan = multiplePlan;
-        this.pointsPurchases = new LinkedList<Integer>();
+        this.pointsPurchases = new LinkedList<Integer>(pointsPurchases);
     }
 
     public Map<CreditCard, AnnualSpending> getCreditCardUsage() {
