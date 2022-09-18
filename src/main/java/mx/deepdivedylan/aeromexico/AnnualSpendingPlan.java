@@ -19,6 +19,13 @@ public class AnnualSpendingPlan {
         this.pointsPurchases = new LinkedList<Integer>();
     }
 
+    public AnnualSpendingPlan(Double exchangeRate) {
+        this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>();
+        this.exchangeRate = exchangeRate;
+        this.multiplePlan = new MultiplePlan();
+        this.pointsPurchases = new LinkedList<Integer>();
+    }
+
     public AnnualSpendingPlan(Double exchangeRate, MultiplePlan multiplePlan) {
         this.creditCardUsage = new HashMap<CreditCard, AnnualSpending>();
         this.exchangeRate = exchangeRate;
@@ -45,9 +52,9 @@ public class AnnualSpendingPlan {
     public Integer calculatePoints() {
         AtomicReference<Integer> points = new AtomicReference<Integer>(0), spent = new AtomicReference<Integer>(0);
         this.creditCardUsage.forEach((card, spending) -> {
-            Integer currPoints = (int)Math.round(card.getMultiplierAeromexico() * spending.getAeromexicoSpending() / exchangeRate + card.getMultiplier() * spending.getNormalSpending() / exchangeRate);
+            Integer currPoints = (int)Math.round(card.getMultiplierAeromexico() * spending.getAeromexicoSpending() / this.exchangeRate + card.getMultiplier() * spending.getNormalSpending() / this.exchangeRate);
             Integer currSpending = spending.getAeromexicoSpending() + spending.getNormalSpending() + card.getAnnualFee();
-            if (card.getNewCard() && currSpending / exchangeRate >= card.getWelcomeThreshold()) {
+            if (card.getNewCard() && currSpending / this.exchangeRate >= card.getWelcomeThreshold()) {
                 currPoints += card.getWelcomeBonus();
             }
             if (currSpending >= card.getAnnualThreshold()) {
@@ -61,7 +68,7 @@ public class AnnualSpendingPlan {
             spent.updateAndGet(v -> v + currSpending);
         });
         this.pointsPurchases.forEach(purchase -> {
-            Integer price = (int)Math.round((15.0 * multiplePlan.getDiscount()) / exchangeRate * Math.floor((double)(purchase / 1000)));
+            Integer price = (int)Math.round((15.0 * multiplePlan.getDiscount()) / this.exchangeRate * Math.floor((double)(purchase / 1000)));
             points.updateAndGet(v -> v + purchase);
             spent.updateAndGet(v -> v + price);
         });
