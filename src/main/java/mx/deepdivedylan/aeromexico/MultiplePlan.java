@@ -10,7 +10,7 @@ public class MultiplePlan {
 
     public MultiplePlan() {
         this.annualPoints = 0;
-        this.discount = 0.0;
+        this.discount = 1.0;
         this.monthlyPoints = 0;
         this.monthlyRate = 0;
     }

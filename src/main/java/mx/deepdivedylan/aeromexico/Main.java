@@ -1,7 +1,7 @@
-package org.deepdivedylan.aeromexico;
+package mx.deepdivedylan.aeromexico;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] argv) {
         System.out.println("Hello world!");
     }
 }
